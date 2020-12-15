@@ -33,7 +33,7 @@ pipeline {
                               sh("git status")
                               sh("git commit -m '${BUILD_NUMBER}'")
                               sh("git pull origin master")
-                              sh('git push origin master')
+                              sh('git push')
                           }
                         }
                     }
