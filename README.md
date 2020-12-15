@@ -22,4 +22,4 @@ Images: Job1_folder shows complete configuration
 - Job2: Job2_folder
 - Job3.png
 - Job4_folder - >  Job4 is used for monitoring, hence it is triggered periodically for evrery min.
-latest
+33
