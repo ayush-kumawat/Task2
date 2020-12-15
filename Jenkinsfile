@@ -19,7 +19,7 @@ pipeline {
                         script {
                           sh "sed -i 's/latest/'${BUILD_NUMBER}'/g' README.md"
                           sh "git commit -am '${BUILD_NUMBER}'"
-                          sh "git push"
+                          sh "git push HEAD:master"
                         }
                     }
                  }
