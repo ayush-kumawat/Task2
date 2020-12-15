@@ -6,7 +6,7 @@ pipeline {
                 script {
                     stage("Clone") {
                         script {
-                          sh "git checkout origin/master"
+                          sh "git checkout"
                         }
                     }
                  }
