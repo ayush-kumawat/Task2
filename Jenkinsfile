@@ -6,7 +6,7 @@ pipeline {
                 script {
                     stage("Clone") {
                         script {
-                          sh "git checkout"
+                          sh "git status"
                         }
                     }
                  }
@@ -32,7 +32,7 @@ pipeline {
                               sh("git add .")
                               sh("git status")
                               sh("git commit -m '${BUILD_NUMBER}'")
-                              sh('git push -u origin master')
+                              sh('git push origin master')
                           }
                         }
                     }
