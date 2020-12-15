@@ -1,5 +1,5 @@
 # Task2
-1. Create container image that’s has Jenkins installed  using dockerfile 
+1. Create container image thatâ€™s has Jenkins installed  using dockerfile 
 
 2. When we launch this image, it should automatically starts Jenkins service in the container.
 
@@ -22,3 +22,4 @@ Images: Job1_folder shows complete configuration
 - Job2: Job2_folder
 - Job3.png
 - Job4_folder - >  Job4 is used for monitoring, hence it is triggered periodically for evrery min.
+version='1'
