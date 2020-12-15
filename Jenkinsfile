@@ -18,8 +18,22 @@ pipeline {
                     stage("upate") {
                         script {
                           sh "sed -i 's/latest/'${BUILD_NUMBER}'/g' README.md"
-                          sh "git commit -am '${BUILD_NUMBER}'"
-                          sh "git push origin HEAD:master"
+                        }
+                    }
+                 }
+            }
+        }
+        stage ('second') {
+            steps { 
+                script {
+                    stage("upate") {
+                        script {
+                          sshagent (credentials: ['git']) {
+                              sh("git add .")
+                              sh("git status")
+                              sh("git commit -m '${BUILD_NUMBER}'")
+                              sh('git push -u origin master')
+                          }
                         }
                     }
                  }
