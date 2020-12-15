@@ -6,7 +6,7 @@ pipeline {
                 script {
                     stage("Clone") {
                         script {
-                          git 'git@github.com:ayush-kumawat/Task2.git'
+                          sh "git checkout"
                         }
                     }
                  }
