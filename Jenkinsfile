@@ -23,10 +23,10 @@ pipeline {
                  }
             }
         }
-        stage ('second') {
+        stage ('third') {
             steps { 
                 script {
-                    stage("upate") {
+                    stage("commit") {
                         script {
                           sshagent (credentials: ['git']) {
                               sh("git add .")
