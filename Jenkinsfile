@@ -21,7 +21,7 @@ pipeline {
                           sh "git config --global user.name 'ayushkumawat'"
                           sh "git config --global user.email ayush21kumawat@gmail.com"
                           sh "git commit -am '${BUILD_NUMBER}'"
-                          sh "git push -u origin/master"
+                          sh "git push origin/master"
                         }
                     }
                  }
