@@ -18,7 +18,7 @@ spec:
               runAsUser: 0
             containers:
               - name: jenkins
-                image: ayushkumawat/argojen:v1
+                image: ayushkumawat/argojen:4
                 env:
                   - name: JAVA_OPTS
                     value: -Djenkins.install.runSetupWizard=false
