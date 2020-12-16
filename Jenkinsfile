@@ -39,8 +39,10 @@ pipeline {
                 script {
                     stage("upate tag") {
                         script {
-                          sh "k=`cat ./k8s/test.yml | grep image |awk -F ":" '{print $(3)}'`"
-                          sh "sed -i 's/jen:'${k}'/jen:v3/g' ./k8s/test.yml"
+                          sh '''
+                            k=`cat ./k8s/test.yml | grep image |awk -F ":" '{print $3}'`
+                            sed -i 's/jen:.*$/jen:'${BUILD_NUMBER}'/g' ./k8s/deploy_jen.yml
+                          '''
                         }
                     }
                  }
