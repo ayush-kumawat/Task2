@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
         name: jenkins-master
-        namespace: jenkins
 spec:
         selector:
           matchLabels:
@@ -32,5 +31,4 @@ spec:
                     mountPath: /var/jenkins_home
             volumes:
               - name: jenkins-home
-                persistentVolumeClaim:
-                  claimName: jenkinsclaim
+                emptyDir: {}
