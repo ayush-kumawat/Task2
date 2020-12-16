@@ -1,32 +1,55 @@
 pipeline {
     agent any
+    environment
+    {
+        VERSION = "${BUILD_NUMBER}"
+        PROJECT = 'argojen'
+        IMAGE = "$PROJECT:$VERSION"
+        ECRURL = 'https://232383674343.dkr.ecr.us-east-1.amazonaws.com/argojen'
+        ECRCRED = 'ecr:us-east-1:aws'
+    }
     stages {
-        stage ('Main Stage') {
+         stage('Image Build'){
+            steps{
+                script{
+                    stage("Build docker") {
+                      script {
+                        docker.build('$IMAGE')
+                      }
+                    }
+                }
+            }
+        }
+        stage('Push Image'){
+            steps{
+                script{
+                  stage("Image push") {
+                    script {
+                      docker.withRegistry(ECRURL, ECRCRED)
+                      {
+                        docker.image(IMAGE).push()
+                      }
+                    }
+                }
+            }
+        }
+    }
+    stage ('tag change') {
             steps { 
                 script {
-                    stage("Clone") {
+                    stage("upate tag") {
                         script {
-                          sh "git status"
+                          sh "k=`cat ./k8s/test.yml | grep image |awk -F ":" '{print $3}'`"
+                          sh "sed -i 's/jen:'${k}'/jen:v3/g' deploy_jen.yml"
                         }
                     }
                  }
             }
         }
-        stage ('second') {
+        stage ('git updtae') {
             steps { 
                 script {
-                    stage("upate") {
-                        script {
-                          sh "sed -i 's/latest/'${BUILD_NUMBER}'/g' README.md"
-                        }
-                    }
-                 }
-            }
-        }
-        stage ('third') {
-            steps { 
-                script {
-                    stage("commit") {
+                    stage("push to github") {
                         script {
                           sshagent (credentials: ['git']) {
                               sh("git add .")
@@ -41,15 +64,11 @@ pipeline {
             }
         }
     }
+    post
+    {
+        always
+        {
+           sh "docker rmi $IMAGE | true"
+        }
+    }
 }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
